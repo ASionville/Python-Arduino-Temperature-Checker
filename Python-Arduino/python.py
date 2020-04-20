@@ -33,19 +33,17 @@ def get_data():
 	temperature_dict = dict(zip(names, values)) #Create a dictionnary with all the temperatures
 
 	#Getting CPU and GPU temperature only
-	temperature_cpu = temperature_dict["CPU Core"]
+	temperature_cpu = int(temperature_dict["CPU Core"])
 	print(temperature_cpu)
-	temperature_gpu = temperature_dict["GPU Core"]
+	temperature_gpu = int(temperature_dict["GPU Core"])
 	print(temperature_gpu)
 
 	#Start the Serial communication (you may have to change the COMXX number)
 	with Serial(port="COM16", baudrate=9600, timeout=1, writeTimeout=1) as port_serie:
     	if port_serie.isOpen(): #Only speak if someone is listening
     		#Send data to the Arduino
-    		cpu_data = str(f"C{temperature_cpu}")
-    		gpu_data = str(f"G{temperature_gpu}")
-    		serial.Serial.write(cpu_data)
-    		serial.Serial.write(gpu_data)
+    		send_data = str(f"C{temperature_cpu}G{temperature_gpu}")
+    		serial.Serial.write(send_data)
 
 	#Repeat every WAIT_SECONDS
 	data_thread = threading.Timer(WAIT_SECONDS, get_data)
