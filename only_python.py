@@ -32,9 +32,9 @@ def get_data():
 	temperature_dict = dict(zip(names, values)) #Create a dictionnary with all the temperatures
 
 	#Getting CPU and GPU temperature only
-	temperature_cpu = temperature_dict["CPU Core"]
+	temperature_cpu = int(temperature_dict["CPU Core"])
 	print(temperature_cpu)
-	temperature_gpu = temperature_dict["GPU Core"]
+	temperature_gpu = int(temperature_dict["GPU Core"])
 	print(temperature_gpu)
 
 	#Repeat every WAIT_SECONDS
